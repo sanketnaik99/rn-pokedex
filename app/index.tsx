@@ -26,80 +26,74 @@ export default function Index() {
 
   if (pokemonData) {
     return (
-      <SafeAreaView>
-        <Box className="h-full w-full flex items-center justify-center">
-          <FlatList
-            data={pokemonData.results}
-            keyExtractor={(item) => item.name}
-            renderItem={({ item }) => (
-              <PokemonCard name={item.name} url={item.url} />
-            )}
-            style={{ width: "100%" }}
-            ItemSeparatorComponent={() => (
-              <Box className="py-2">
-                <Divider />
-              </Box>
-            )}
-            ListFooterComponent={() => (
-              <HStack space="sm" className="p-4 justify-center">
-                <Button
-                  disabled={pageNumber === 1}
-                  variant="outline"
-                  onPress={() => setPageNumber((prev) => prev - 1)}
-                >
-                  <ButtonIcon as={ArrowLeftIcon} />
-                </Button>
+      <Box className="h-full w-full flex items-center justify-center pb-8">
+        <FlatList
+          data={pokemonData.results}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => (
+            <PokemonCard name={item.name} url={item.url} />
+          )}
+          style={{ width: "100%" }}
+          ItemSeparatorComponent={() => (
+            <Box className="py-1">
+              <Divider />
+            </Box>
+          )}
+          ListFooterComponent={() => (
+            <HStack space="sm" className="p-4 justify-center">
+              <Button
+                disabled={pageNumber === 1}
+                variant="outline"
+                onPress={() => setPageNumber((prev) => prev - 1)}
+              >
+                <ButtonIcon as={ArrowLeftIcon} />
+              </Button>
 
-                <Button
-                  variant={pageNumber === 1 ? "solid" : "outline"}
-                  onPress={() =>
-                    setPageNumber(
-                      pageNumber === 1 ? pageNumber : pageNumber - 1
-                    )
-                  }
-                >
-                  <ButtonText>
-                    {pageNumber === 1 ? pageNumber : pageNumber - 1}
-                  </ButtonText>
-                </Button>
+              <Button
+                variant={pageNumber === 1 ? "solid" : "outline"}
+                onPress={() =>
+                  setPageNumber(pageNumber === 1 ? pageNumber : pageNumber - 1)
+                }
+              >
+                <ButtonText>
+                  {pageNumber === 1 ? pageNumber : pageNumber - 1}
+                </ButtonText>
+              </Button>
 
-                <Button
-                  variant={pageNumber === 1 ? "outline" : "solid"}
-                  onPress={() =>
-                    setPageNumber(
-                      pageNumber === 1 ? pageNumber + 1 : pageNumber
-                    )
-                  }
-                >
-                  <ButtonText>
-                    {pageNumber === 1 ? pageNumber + 1 : pageNumber}
-                  </ButtonText>
-                </Button>
+              <Button
+                variant={pageNumber === 1 ? "outline" : "solid"}
+                onPress={() =>
+                  setPageNumber(pageNumber === 1 ? pageNumber + 1 : pageNumber)
+                }
+              >
+                <ButtonText>
+                  {pageNumber === 1 ? pageNumber + 1 : pageNumber}
+                </ButtonText>
+              </Button>
 
-                <Button
-                  variant="outline"
-                  onPress={() =>
-                    setPageNumber(
-                      pageNumber === 1 ? pageNumber + 2 : pageNumber + 1
-                    )
-                  }
-                >
-                  <ButtonText>
-                    {pageNumber === 1 ? pageNumber + 2 : pageNumber + 1}
-                  </ButtonText>
-                </Button>
+              <Button
+                variant="outline"
+                onPress={() =>
+                  setPageNumber(
+                    pageNumber === 1 ? pageNumber + 2 : pageNumber + 1
+                  )
+                }
+              >
+                <ButtonText>
+                  {pageNumber === 1 ? pageNumber + 2 : pageNumber + 1}
+                </ButtonText>
+              </Button>
 
-                <Button
-                  variant="outline"
-                  onPress={() => setPageNumber((prev) => prev + 1)}
-                >
-                  <ButtonIcon as={ArrowRightIcon} />
-                </Button>
-              </HStack>
-            )}
-          />
-        </Box>
-      </SafeAreaView>
+              <Button
+                variant="outline"
+                onPress={() => setPageNumber((prev) => prev + 1)}
+              >
+                <ButtonIcon as={ArrowRightIcon} />
+              </Button>
+            </HStack>
+          )}
+        />
+      </Box>
     );
   }
 }
