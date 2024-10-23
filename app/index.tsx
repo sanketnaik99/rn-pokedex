@@ -1,15 +1,19 @@
+import { useState } from "react";
+
+// Libraries
+import { FlatList } from "react-native";
+
 // Components
-import PokemonCard from "@/components/home/PokemonCard";
+import { PokemonCard } from "@/components/home/PokemonCard";
+import { PokemonCardSkeleton } from "@/components/home/PokemonCardSkeleton";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
-import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
-import { Text } from "@/components/ui/text";
-import { useGetAllPokemon } from "@/hooks/queries/useGetAllPokemon";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react-native";
-import { useState } from "react";
-import { FlatList, SafeAreaView } from "react-native";
+
+// Hooks
+import { useGetAllPokemon } from "@/hooks/queries/useGetAllPokemon";
 
 export default function Index() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,10 +21,16 @@ export default function Index() {
 
   if (isLoading) {
     return (
-      <Box className="h-full w-full flex items-center justify-center">
-        <Heading>PokeDex</Heading>
-        <Text>PokeDex Loading..</Text>
-      </Box>
+      <FlatList
+        data={[1, 2, 3, 4, 5]}
+        keyExtractor={(item) => String(item)}
+        renderItem={({ item }) => <PokemonCardSkeleton />}
+        ItemSeparatorComponent={() => (
+          <Box className="py-1">
+            <Divider />
+          </Box>
+        )}
+      />
     );
   }
 

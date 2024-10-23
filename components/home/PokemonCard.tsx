@@ -1,26 +1,28 @@
-import { useGetPokemon } from "@/hooks/queries/useGetPokemon";
 import React from "react";
+
+// Libraries
+import { Image } from "react-native";
+
+// Hooks
+import { useGetPokemon } from "@/hooks/queries/useGetPokemon";
+
+// Components
 import { Box } from "../ui/box";
 import { Heading } from "../ui/heading";
-import { Divider } from "../ui/divider";
 import { Card } from "../ui/card";
-import { Image } from "react-native";
 import { Badge, BadgeText } from "../ui/badge";
+import { PokemonCardSkeleton } from "./PokemonCardSkeleton";
 
 interface Props {
   name: string;
   url: string;
 }
 
-const PokemonCard = ({ name, url }: Props) => {
+export const PokemonCard = ({ name, url }: Props) => {
   const { data: pokemonData, isLoading } = useGetPokemon(url, name);
 
   if (isLoading) {
-    return (
-      <Box className="h-40 w-full p-4">
-        <Heading>Loading...</Heading>
-      </Box>
-    );
+    return <PokemonCardSkeleton />;
   }
 
   if (pokemonData) {
@@ -57,5 +59,3 @@ const PokemonCard = ({ name, url }: Props) => {
     );
   }
 };
-
-export default PokemonCard;
